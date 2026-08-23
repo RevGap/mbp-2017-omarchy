@@ -56,8 +56,9 @@
 -- hl.gesture({ fingers = 3, direction = "left", action = function() hl.dispatch(hl.dsp.focus({ direction = "l" })) end })
 -- hl.gesture({ fingers = 3, direction = "right", action = function() hl.dispatch(hl.dsp.focus({ direction = "r" })) end })
 
--- MacBookPro14,3 (2017 Touch Bar): Escape is a Touch Bar key, and the Touch Bar
--- is dead (T1 chip sits in DFU), so there is no physical Escape. Remap Caps Lock.
+-- MacBookPro14,3 (2017 Touch Bar): keep Caps Lock mapped to Escape even when the
+-- Touch Bar is working. It provides a reliable physical Escape key and leaves the
+-- Touch Bar free to show Esc/F-keys according to the T1 driver configuration.
 -- Omarchy's default kb_options puts Compose on Caps, so Compose moves to right Alt.
 hl.config({
   input = {
