@@ -41,14 +41,29 @@ The upstream project was verified on the 13-inch Intel-only MacBookPro14,2. This
 
 ```
 ├── README.md                              # This guide
+├── AGENTS.md                              # Instructions for AI agents (Claude Code, etc.)
 ├── hypr/
 │   └── bindings.lua                       # Brightness keybindings (no F-row on this chassis)
 ├── scripts/
+│   ├── post-install.sh                    # Idempotent automation for sections 7-15
 │   └── install-hypr-overrides.sh          # Installs the bindings into ~/.config/hypr
 └── systemd/
     ├── macbook-kbd-backlight.service      # Persists keyboard backlight level across reboots
     └── macbook-no-suspend.conf            # logind lid policy (suspend disabled — see §15)
 ```
+
+## Automated post-install
+
+Sections 1–5 (macOS-side prep and the Omarchy install itself) must be done by hand. Everything after that — sections 7–15 — can be run in one shot:
+
+```bash
+git clone https://github.com/RevGap/mbp-2017-omarchy.git && cd mbp-2017-omarchy
+./scripts/post-install.sh                            # after omarchy-update (section 6)
+./scripts/post-install.sh --wifi-mac AA:BB:CC:DD:EE:FF   # if Wi-Fi shows the 00:90:4c placeholder
+./scripts/post-install.sh --verify                   # health check (section 17)
+```
+
+The script is idempotent — re-run it after each reboot and it skips what's already done. If you're pointing an AI agent at this repo, it should read [AGENTS.md](AGENTS.md) first.
 
 ---
 
